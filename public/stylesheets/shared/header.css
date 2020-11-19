@@ -1,85 +1,70 @@
 .nav-bar-container,
-.nav-bar,
-.nav-bar-lists,
-.nav-bar-lists-logs {
+.nav-bar-lists-logs,
+.nav-bar-lists {
   display: flex;
-}
-
-.header-title {
-  flex: 1;
-  display: flex;
-  background-color: aqua;
   align-items: center;
-  justify-content: center;
 }
-
-.header-title a {
-  font-size: 35px;
-  font-weight: 700;
+.nav-bar-container {
+  height: 100px;
 }
-.nav-bar {
+.header-title {
   flex: 2.5;
-  background-color: lightcoral;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  font-weight: bold;
 }
-
 .nav-bar {
-  flex-direction: column;
-  max-height: 100px;
+  flex: 4;
 }
-
+.nav-bar-logs {
+  position: absolute;
+  right: 0%;
+  top: 0;
+  height: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+* > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+* > ul {
+  margin: 0;
+  padding: 0;
+}
 * > a {
   text-decoration: none;
   color: black;
 }
-
-* > li {
-  list-style: none;
-  background-color: lightgreen;
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-* > a:hover {
-  cursor: pointer;
-  color: grey;
-}
-
-.nav-bar-container {
-  height: 12vh;
-  max-height: 100px;
-  align-items: center;
-}
-
-.nav-bar-container > * {
-  height: 100%;
-}
-
-.nav-bar-links {
-  height: 100%;
-  background-color: honeydew;
-}
-.nav-bar-logs {
-  background-color: lightblue;
-}
-
-.nav-bar-links a {
-  font-size: 12px;
-  background-color: lightcoral;
-}
-.nav-bar-logs a {
-  font-size: 12px;
-}
-.nav-bar-lists-logs {
-  justify-content: flex-end;
-}
+.nav-bar-lists-logs,
 .nav-bar-lists {
-  justify-content: space-around;
-  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
+}
+.nav-bar-lists li {
+  margin-right: 10vw;
+}
+.nav-bar-lists li:last-child {
+  margin-right: 0;
+}
+.nav-bar-lists-logs li:first-child {
+  margin-right: 10px;
+}
+.nav-bar-lists li a {
+  font-size: 30px;
+}
+.nav-bar-lists-logs li a {
+  font-size: 12px;
 }
 
-ul {
-  padding: 0;
-  margin: 0;
-  height: 100%;
+.header-container {
+  border-bottom: 1px solid black;
+  position: sticky;
+  top: 0;
+  background-color: lightsteelblue;
 }
