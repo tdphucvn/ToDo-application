@@ -1,4 +1,6 @@
 @import "shared/header.css";
+@import "shared/footer.css";
+@import "shared/index.css";
 
 html,
 body {
@@ -8,5 +10,5 @@ body {
 }
 
 .content {
-  height: 200vh;
+  height: 96vh;
 }

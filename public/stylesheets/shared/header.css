@@ -5,7 +5,7 @@
   align-items: center;
 }
 .nav-bar-container {
-  height: 100px;
+  height: 15vh;
 }
 .header-title {
   flex: 2.5;
