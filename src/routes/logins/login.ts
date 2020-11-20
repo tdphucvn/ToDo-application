@@ -6,4 +6,4 @@ router.get('/', (req, res) => {
     res.render('logins/index');
 });
 
-export = router;
+export {router};

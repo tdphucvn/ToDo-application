@@ -1,15 +1,8 @@
-import mongoose from 'mongoose';
-interface IUser {
-    username: string;
-    email: string;
-    password: string;
-}
+import mongoose, { Schema, model} from 'mongoose';
+import { IUser } from '../types/user';
 
-// interface userModelInterface extends mongoose.Model<any> {
-//     build(attr: IUser): any;
-// };
 
-const userSchema = new mongoose.Schema({
+const userSchema: Schema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -32,13 +25,4 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-const User = mongoose.model('user', userSchema);
-// const User = mongoose.model<any, userModelInterface>('user', userSchema);
-
-// User.build({
-//     username: 'some username',
-//     email: 'some email',
-//     password: 'some password'
-// });
-
-export = User;
+export default model<IUser>('user', userSchema); 
