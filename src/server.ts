@@ -15,6 +15,8 @@ const app: Application = express();
 // import {router as indexRouter} from './routes/index';
 
 import indexRouter = require('./routes/index');
+import loginRouter = require('./routes/login/login');
+import registerRouter = require('./routes/register/register');
 
 //Using EJS as view engine
 app.set('view engine', 'ejs');
@@ -32,6 +34,8 @@ app.use(bodyParser.urlencoded({limit: '10mb', extended: false}));
 
 //Middleware routes
 app.use('/', indexRouter);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 
 
 
