@@ -4,7 +4,7 @@ if(process.env.NODE_ENV !== 'production'){
 };
 
 //Port
-const PORT: string | number = process.env.PORT || 5000;
+const PORT: string | number = process.env.PORT || 4000;
 
 //import expressjs
 import express, {Application, Request, Response, NextFunction} from 'express';
@@ -12,6 +12,8 @@ import expressLayouts from 'express-ejs-layouts';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
+
 
 //creating application
 const app: Application = express();
@@ -19,8 +21,8 @@ const app: Application = express();
 // import {router as indexRouter} from './routes/index';
 
 import {router as indexRouter} from './routes/index';
-import {router as loginRouter} from './routes/logins/login';
-import {router as registerRouter} from './routes/registers/register';
+import {router as loginRouter} from './routes/user/login';
+import {router as registerRouter} from './routes/user/register';
 import {router as privateRouter} from './routes/privates/indexPrivate';
 
 
@@ -36,6 +38,8 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 //Parsing to JSON data
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}));
+app.use(cookieParser());
+
 
 
 //Middleware routes

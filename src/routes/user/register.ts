@@ -10,7 +10,7 @@ const router = express.Router();
 const saltRounds: number = 10;
 
 router.get('/', (req: Request, res: Response) => {
-    res.render('registers/index');
+    res.render('user/register');
 });
 
 router.post('/create', async (req: Request, res: Response): Promise<void> => {
@@ -39,12 +39,12 @@ router.post('/create', async (req: Request, res: Response): Promise<void> => {
             password: hashedPassword
         });
         const newUser = await user.save();
-        const secretToken: string = `${process.env.TOKEN_SECRET}`;
-        const token: string = jwt.sign({_id: newUser._id}, secretToken);
-        res.redirect(`../private/${newUser.id}`);
-        // res.header('auth-token', token).send(token);
+        const secretToken: string = `${process.env.ACCESS_TOKEN_SECRET}`;
+        const token: string = jwt.sign({ newUser }, secretToken);
+        res.cookie('authorization', token, {httpOnly: true, expires: new Date(Date.now() + 5000)});
+        res.redirect(`../private`);
     } catch (err) {
-        res.render('registers/index');
+        res.redirect('/register'); //render new page with the information
     };
 });
 

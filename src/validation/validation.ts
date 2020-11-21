@@ -1,7 +1,6 @@
 import Joi from 'joi';
 // import {IUser} from '../types/user';
 
-
 const registerValidation = (data: any) => {
     const schema = Joi.object({
         username: Joi.string().min(6).required(),
@@ -13,7 +12,7 @@ const registerValidation = (data: any) => {
 
 const loginValidation = (data: any) => {
     const schema = Joi.object({
-        email: Joi.string().min(6).required().email(),
+        username: Joi.string().min(6).required(),
         password: Joi.string().min(8).required()
     });
     return schema.validate(data)
