@@ -1,9 +1,9 @@
 import express, {Application, Request, Response, NextFunction} from 'express';
 import { Document } from 'mongoose';
-import User from '../../model/User';
-import {IUser} from '../../types/user';
+import User from '../../../model/User';
+import {IUser} from '../../../types/user';
 import bcrypt from 'bcrypt';
-import {registerValidation} from '../../validation/validation';
+import {registerValidation} from '../../../validation/validation';
 import jwt from 'jsonwebtoken';
 
 const router = express.Router();

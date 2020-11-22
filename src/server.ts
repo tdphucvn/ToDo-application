@@ -4,7 +4,7 @@ if(process.env.NODE_ENV !== 'production'){
 };
 
 //Port
-const PORT: string | number = process.env.PORT || 4000;
+const PORT: string | number = process.env.PORT || 3000;
 
 //import expressjs
 import express, {Application, Request, Response, NextFunction} from 'express';
@@ -20,10 +20,10 @@ const app: Application = express();
 
 // import {router as indexRouter} from './routes/index';
 
-import {router as indexRouter} from './routes/index';
-import {router as loginRouter} from './routes/user/login';
-import {router as registerRouter} from './routes/user/register';
-import {router as privateRouter} from './routes/privates/indexPrivate';
+import {router as indexRouter} from './routes/open/index';
+import {router as loginRouter} from './routes/open/user/login';
+import {router as registerRouter} from './routes/open/user/register';
+import {router as privateRouter} from './routes/private/indexPrivate';
 
 
 //Using EJS as view engine
