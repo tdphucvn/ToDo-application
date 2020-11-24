@@ -17,7 +17,6 @@ const authenticateToken = (req: Request | any, res: Response, next: NextFunction
         req.user = decoded;
     } catch {
         try {
-            // console.log('HI')
             const refreshToken: string = req.cookies.refreshToken;
             const refreshSecretToken: string = `${process.env.REFRESH_TOKEN_SECRET}`;
             if (refreshToken == null){
@@ -43,24 +42,33 @@ router.use(authenticateToken);
 router.get('/', async (req: Request | any, res: Response) => {
     const user = req.user;
     let id;
-    if(user._id == undefined){
-        if(user.user._id !== undefined){
-            id = user.user._id;
+    if(user !== undefined){
+        if(user._id !== undefined){
+            if(user.user!== undefined && user.user._id !== undefined){
+                id = user.user._id;
+                console.log(user);
+            }else{
+                id = user.user.user._id;
+                console.log('id not found');
+                console.log(user);
+            }
+        } else{
+            id = user._id;
             console.log(user);
-        }else{
-            id = user.user.user._id;
-            console.log('id not found');
-            console.log(user);
-        }
-    } else{
-        id = user._id;
-        console.log(user);
+        }    
     }
 
     const userInfo = await UserInfo.findOne({user: id});
-    console.log(userInfo);
-    console.log(id);
-    res.render('private/index');
+    const userInfoObject = {
+        First_Name: userInfo?.fname,
+        Last_Name: userInfo?.lname,
+        Birthday: userInfo?.bday,
+        Street: userInfo?.street,
+        City: userInfo?.city,
+        Postal_Code: userInfo?.pcode
+    }
+    console.log(userInfoObject);
+    res.render('private/index', {object: userInfoObject});
 });
 
 router.get('/personal', async (req: Request, res: Response) => {

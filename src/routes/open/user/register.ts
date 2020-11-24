@@ -39,11 +39,15 @@ router.post('/create', async (req: Request, res: Response): Promise<void> => {
             password: hashedPassword
         });
         const newUser = await user.save();
-        const secretToken: string = `${process.env.ACCESS_TOKEN_SECRET}`;
-        const token: string = jwt.sign({ newUser }, secretToken);
-        res.cookie('authorization', token, {httpOnly: true, expires: new Date(Date.now() + 5000)});
+        const accessSecretToken: string = `${process.env.ACCESS_TOKEN_SECRET}`;
+        const refreshSecretToken: string = `${process.env.REFRESH_TOKEN_SECRET}`;
+        const accessToken: string = jwt.sign({ newUser }, accessSecretToken, {expiresIn: '10s'});
+        const refreshToken: string = jwt.sign({ newUser }, refreshSecretToken);
+        res.cookie('authorization', accessToken, {httpOnly: true});
+        res.cookie('refreshToken', refreshToken, {httpOnly: true});
         res.redirect(`../private`);
     } catch (err) {
+        console.log(err);
         res.redirect('/register'); //render new page with the information
     };
 });

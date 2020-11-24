@@ -1,0 +1,6 @@
+<% Object.keys(object).forEach(key => { %> 
+    <% const descriptin = key.split('_').join(' ')%>
+    <% if(object[key] == undefined) object[key]='' %> 
+    <% const attribute = `${descriptin}: ${object[key]}`%> 
+    <div><%= attribute %></div>
+<% }) %>
