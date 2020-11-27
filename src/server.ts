@@ -23,8 +23,8 @@ const app: Application = express();
 import {router as indexRouter} from './routes/open/index';
 import {router as loginRouter} from './routes/open/user/login';
 import {router as registerRouter} from './routes/open/user/register';
-// import {router as privateRouter} from './routes/private/indexPrivate';
-import {router as privateRouter} from './routes/private/debug';
+import {router as privateRouter} from './routes/private/indexPrivate';
+// import {router as privateRouter} from './routes/private/debug';
 
 //Using EJS as view engine
 app.set('view engine', 'ejs');
