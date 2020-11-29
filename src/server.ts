@@ -24,6 +24,7 @@ import {router as indexRouter} from './routes/open/index';
 import {router as loginRouter} from './routes/open/user/login';
 import {router as registerRouter} from './routes/open/user/register';
 import {router as privateRouter} from './routes/private/indexPrivate';
+import {router as personalRouter} from './routes/private/personal';
 // import {router as privateRouter} from './routes/private/debug';
 
 //Using EJS as view engine
@@ -47,6 +48,7 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/private', privateRouter);
+app.use('/private/personal', personalRouter);
 
 const uri: string = `${process.env.DB_CONNECTION}`;
 const options = { useUnifiedTopology: true , useNewUrlParser: true };

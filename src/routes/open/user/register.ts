@@ -43,9 +43,9 @@ router.post('/create', async (req: Request, res: Response): Promise<void> => {
         const accessSecretToken: string = `${process.env.ACCESS_TOKEN_SECRET}`;
         const refreshSecretToken: string = `${process.env.REFRESH_TOKEN_SECRET}`;
         const accessToken: string = jwt.sign({ user: newUser }, accessSecretToken, {expiresIn: '10s'});
-        const refreshToken: string = jwt.sign({ user: newUser }, refreshSecretToken);
+        const refreshToken: string = jwt.sign({ user: newUser }, refreshSecretToken, {expiresIn: '1day'});
         res.cookie('authorization', accessToken, {httpOnly: true});
-        res.cookie('refreshToken', refreshToken, {httpOnly: true});
+        res.cookie('refreshToken', refreshToken, {httpOnly: true, expires: new Date(86400000)});
         res.redirect(`../private/personal`);
     } catch (err) {
         console.log(err);

@@ -33,9 +33,9 @@ router.post('/request', async (req, res) => {
         const accessSecretToken: string = `${process.env.ACCESS_TOKEN_SECRET}`;
         const refreshSecretToken: string = `${process.env.REFRESH_TOKEN_SECRET}`;
         const accessToken: string = jwt.sign({ user }, accessSecretToken, {expiresIn: '10s'});
-        const refreshToken: string = jwt.sign({ user }, refreshSecretToken);
+        const refreshToken: string = jwt.sign({ user }, refreshSecretToken, {expiresIn: '1day'});
         res.cookie('authorization', accessToken, {httpOnly: true});
-        res.cookie('refreshToken', refreshToken, {httpOnly: true});
+        res.cookie('refreshToken', refreshToken, {httpOnly: true, maxAge: 86400000});
         res.redirect('../private');
     } catch (err){
         res.redirect('/login');
