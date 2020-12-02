@@ -8,8 +8,34 @@ import { Document } from 'mongoose';
 
 const router = express.Router();
 
-router.get('/', async (req: Request, res: Response) => {
-    res.render('private/personal');
+router.get('/', async (req: Request | any, res: Response) => {
+    const user = req.user;
+    let id;
+    if(user !== undefined){
+        if(user._id !== undefined){
+            id = user._id;
+            console.log(user, 'third case', id);
+        } else {
+            if(user.user !== undefined && user.user._id !== undefined){
+                id = user.user._id;
+                console.log(user, 'first case', id);
+            }else{
+                id = user.user.user._id;
+                console.log(user, 'second case', id);
+            };
+        };
+    };
+
+    const userInfo = await UserInfo.findOne({user: id});
+    const userInfoObject = {
+        fname: userInfo?.fname,
+        lname: userInfo?.lname,
+        bday: userInfo?.bday,
+        street: userInfo?.street,
+        city: userInfo?.city,
+        pcode: userInfo?.pcode
+    }
+    res.render('private/personal', {userInfoObject : userInfoObject});
 });
 
 router.post('/edit', async (req: Request | any, res: Response) => {
@@ -55,6 +81,7 @@ router.post('/edit', async (req: Request | any, res: Response) => {
         res.redirect('/private/personal');
     };
 });
+
 
 
 export{ router }

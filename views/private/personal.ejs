@@ -1,15 +1,15 @@
 <form action="/private/personal/edit" method="POST">
     <label for="fname">First name: </label>
-    <input type="text" name="fname" required>
+    <input type="text" name="fname" value="<%= userInfoObject.fname %>" required>
     <label for="lname">Last name: </label>
-    <input type="text" name="lname" required>
+    <input type="text" name="lname" value="<%= userInfoObject.lname %>" required>
     <label for="bday">Birth Date </label>
-    <input type="date" name="bday" required>
+    <input type="date" name="bday" value="<%= userInfoObject.bday == null ? '' : userInfoObject.bday.toISOString().split('T')[0] %>" required>
     <label for="street">Street: </label>
-    <input type="text" name="street" required>
+    <input type="text" name="street" value="<%= userInfoObject.street %>" required>
     <label for="city">City: </label>
-    <input type="text" name="city" required>
+    <input type="text" name="city" value="<%= userInfoObject.city %>" required>
     <label for="pcode">Postal code: </label>
-    <input type="number" name="pcode" required>
+    <input type="number" name="pcode" value="<%= userInfoObject.pcode %>" required>
     <button type="submit">Create</button>
 </form>
