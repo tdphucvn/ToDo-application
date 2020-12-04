@@ -28,6 +28,7 @@ router.get('/', async (req: Request | any, res: Response) => {
 
     const userInfo = await UserInfo.findOne({user: id});
     const userInfoObject = {
+        userID: id,
         fname: userInfo?.fname,
         lname: userInfo?.lname,
         bday: userInfo?.bday,
@@ -38,7 +39,7 @@ router.get('/', async (req: Request | any, res: Response) => {
     res.render('private/personal', {userInfoObject : userInfoObject});
 });
 
-router.post('/edit', async (req: Request | any, res: Response) => {
+router.post('/:id', async (req: Request | any, res: Response) => {
     try {
         const accessToken: string = req.cookies.authorization;
         const accessTokenSecret: string = `${process.env.ACCESS_TOKEN_SECRET}`;
@@ -55,15 +56,7 @@ router.post('/edit', async (req: Request | any, res: Response) => {
             res.status(400);
             throw error;
         };
-        if(req.user.user == undefined){
-            user = req.user;
-        }else{
-            if(req.user.user !== undefined){
-                user = req.user.user;
-            } else{
-                user = req.user.user.user
-            }
-        };
+        const USER = await User.findById(req.params.id);
         console.log(user);
         const userInfo: Document = new UserInfo({
             fname: body.fname,
@@ -72,7 +65,7 @@ router.post('/edit', async (req: Request | any, res: Response) => {
             street: body.street,
             city: body.city, 
             pcode: body.pcode,
-            user: user
+            user: USER
         })
         const newUserInfo = await userInfo.save();
         res.redirect('/private');
@@ -82,6 +75,42 @@ router.post('/edit', async (req: Request | any, res: Response) => {
     };
 });
 
-
+router.put('/:id', async (req: Request | any, res: Response) => {
+    try {
+        const accessToken: string = req.cookies.authorization;
+        const accessTokenSecret: string = `${process.env.ACCESS_TOKEN_SECRET}`;
+        try {
+            const decoded = jwt.verify(accessToken, accessTokenSecret);
+            req.user = decoded;
+        } catch (err){
+            console.log('Unauthorized');
+        };
+        const body = req.body as Pick<IUserInfo, "fname" | "lname" | "bday" | "street" | "city" | "pcode">;
+        const {error} = userInfoValidation(req.body);
+        if(error){
+            console.log(error);
+            res.status(400);
+            throw error;
+        };
+        const USER = await UserInfo.findOne({user : req.params.id});
+        if (USER == null){
+            res.status(400);
+            console.log('Hieu')
+            throw error;
+        } else {
+            USER.fname = body.fname;
+            USER.lname = body.lname;
+            USER.bday = body.bday;
+            USER.street = body.street;
+            USER.city = body.city;
+            USER.pcode = body.pcode;
+        }
+        const userSaved = await USER.save();        
+        res.redirect('/private');
+    } catch (err){
+        console.log(err);
+        res.redirect('/private/personal');
+    };
+});
 
 export{ router }
