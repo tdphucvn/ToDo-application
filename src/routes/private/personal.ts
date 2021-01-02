@@ -95,7 +95,6 @@ router.put('/:id', async (req: Request | any, res: Response) => {
         const USER = await UserInfo.findOne({user : req.params.id});
         if (USER == null){
             res.status(400);
-            console.log('Hieu')
             throw error;
         } else {
             USER.fname = body.fname;

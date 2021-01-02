@@ -1,12 +1,38 @@
-<form action="/register/create" method="POST">
-    <label for="username">Username: </label>
-    <input type="text" name="username" required>
-    <label for="password">Password (8 characters minimum)</label>
-    <input type="password" name="password" id="password" minlength="8" required>
-    <!-- <label for="password">Confirm Password</label>
-    <input type="password" name="confirm_password" id="confirm_password" minlength="8" onchange="check_pass();" required> -->
-    <span id="message"></span>
-    <label for="email">Email: </label>
-    <input type="email" name="email" required>
-    <button type="submit">Register</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="register-page.css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <div class="background-container">
+            <div class="background-message-container">
+                <h2 class="background-moto">Welcome Fantomas!</h2>
+                <div class="background-description">RGB stands for (Red, Green, Blue)</div>
+            </div>
+            <div class="advertisement">
+                <div class="author">Designed By @Fantomas123</div>
+            </div>
+        </div>
+        <div class="form-field-container">
+            <div class="form-field-title-container">
+                <div class="form-field-title"><h2>Sign Up</h2></div>
+            </div>
+            <div class="form-field-form">
+                <form action="./register/create" method="POST" id="login-form">
+                    <input type="text" id="username" name="username" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{4,20}$*" placeholder="Enter Username" required>
+                    <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter Password" required>
+                    <input type="password" id="confirmpassword" name="confirmpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm Password" required><span id="errorMess"></span>
+                    <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  placeholder="Enter Email" required>   
+                    <button type="submit" id="submit" class="btn"><h3>Sign Up</h3></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

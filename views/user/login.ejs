@@ -1,8 +1,29 @@
-<form action="/login/request" method="POST">
-    <label for="username">Username: </label>
-    <input type="text" name="username">
-    <label for="password">Password (8 characters minimum)</label>
-    <input type="password" name="password" minlength="8" required>
-    <button type="submit">Login</button>
-    <div>Not registered yet? <a href="/register">Register</a></div>
-</form>
+<div class="container">
+    <div class="background-container">
+        <div class="background-message-container">
+            <h1 class="background-moto">Follow your dreams</h1>
+            <div class="background-description">Nutrition and training guides made for you.</div>
+        </div>
+        <div class="advertisement">
+            <div class="add">Get your free training plan!</div>
+        </div>
+    </div>
+    <div class="form-field-container">
+        <div class="form-field-title-container">
+            <div class="form-field-title"><h2>Log In</h2></div>
+            <div class="form-field-description">Please Fill In Your Credentials</div>
+        </div>
+        <div class="form-field-form">
+            <form action="./login/request" method="POST" id="login-form">
+                <input type="text" id="username" name="username" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{4,20}$*" placeholder="Enter Username" required>
+                <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter Password" required>
+                <button type="submit" id="submit" class="btn"><h3>Login</h3></button>
+            </form>
+            <form action="./register" method="GET" class="sign-up-container">
+                <button type="submit" id="sign-up" class="btn"><h3 class="gradient-text">Don't Have Account? Signup</h3></button>
+            </form>
+            <div class="pwdres"><a href="" class="gradient-text">Forgot Password?</a></div>
+        </div>
+    </div>
+</div>
+
